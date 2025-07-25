@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection - users can only read/write their own data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.keys().hasAll(['email', 'firstName', 'lastName', 'uid'])
+        && request.resource.data.uid == userId
+        && request.resource.data.email == request.auth.token.email;
+    }
+    
+    // Verification codes collection - users can only access their own codes
+    match /verificationCodes/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow create: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.uid == userId;
+    }
+    
+    // Allow authenticated users to query for phone number uniqueness
+    match /users/{userId} {
+      allow read: if request.auth != null 
+        && request.query.limit <= 1
+        && (
+          'fullPhone' in request.query.where ||
+          'email' in request.query.where
+        );
+    }
+    
+    // Deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
