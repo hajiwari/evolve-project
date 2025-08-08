@@ -787,7 +787,7 @@ export default {
           alert('No user found. Please try signing up again.')
         }
       } catch (error) {
-        console.error('Resend verification error:', error)
+        console.error('Re-send verification error:', error)
         alert('Failed to resend verification email: ' + (error.message || 'Please try again.'))
       }
     }
