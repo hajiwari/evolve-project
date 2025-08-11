@@ -39,7 +39,7 @@
           <!-- Enhanced Search Section -->
           <div class="bg-white bg-opacity-90 backdrop-blur-md rounded-2xl shadow-2xl p-6 mb-12 max-w-4xl mx-auto border border-gray-100 drop-in-element" style="animation-delay: 1.2s;">
             <div class="mb-4">
-              <h3 class="text-xl font-bold text-gray-900 mb-2">Find Your Perfect Learning Resource</h3>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Search a product</h3>
               <p class="text-gray-600 text-sm">Search our extensive library of healthcare education materials</p>
             </div>
             
